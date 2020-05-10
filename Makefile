@@ -1,7 +1,7 @@
 SHELL=/bin/bash -o pipefail
 
 # Prechecks of needed packages, some can be autoinstalled later on
-ARTIFACT_NAME := theenglishcutd
+ARTIFACT_NAME := productd
 
 GOPROXY ?= ""
 
