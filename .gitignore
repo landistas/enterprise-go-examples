@@ -1,0 +1,5 @@
+.vscode
+.idea
+bin
+_build
+gin-bin

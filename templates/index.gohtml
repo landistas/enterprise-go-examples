@@ -1,0 +1,58 @@
+<html>
+    <body>
+        <h1>Your first Go app?</h1>
+
+        <form>
+            <label for="id">ID:</label>
+            <input type="text" id="id"><br>
+            
+            <label for="name">Name:</label>
+            <input type="text" id="name"><br>
+
+            <label for="priceInCents">Price:</label>
+            <input type="text" id="priceInCents"><br>
+            
+            <button onclick="createProduct(event)">Create</button>
+        </form>
+
+        <div id="products"></div>
+        
+        <script>
+        function createProduct(e) {
+            e.preventDefault();
+
+            let product = {
+                'id': document.getElementById('id').value,
+                'name': document.getElementById('name').value,
+                'priceInCents': parseInt(document.getElementById('priceInCents').value)
+            }
+            
+            fetch("/products", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                showProducts();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        function showProducts() {
+            fetch('/products')
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById('products').innerHTML = data.products.map((product) => product.name).join(", ")             
+            });
+        }
+
+        showProducts();
+        </script>
+    </body>
+</html>
