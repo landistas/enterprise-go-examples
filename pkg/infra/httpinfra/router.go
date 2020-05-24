@@ -1,10 +1,6 @@
 package httpinfra
 
 import (
-	_ "github.com/gorilla/mux"
-)
-
-import (
 	"net/http"
 
 	"github.com/gorilla/mux"
