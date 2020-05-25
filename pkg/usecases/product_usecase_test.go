@@ -41,3 +41,21 @@ func TestCreateDuplicatedProduct(t *testing.T) {
 	require.Nil(t, returnedProduct)
 	require.Error(t, err)
 }
+
+func TestGetProductOK(t *testing.T) {
+	product := entities.Product{ID: "id", Name: "some-name"}
+	infraStorage := &tests.StubInfraStorage{}
+	useCase := usecases.NewDefaultProductUseCase(
+		tests.StubProductStorageAdapter{
+			StubInfraStorage: infraStorage,
+		},
+	)
+
+	err := infraStorage.Save(context.TODO(), product.ID, product)
+	require.NoError(t, err)
+	returnedProduct, err := useCase.GetProduct(context.TODO(), product.ID)
+
+	require.NoError(t, err)
+	require.NotNil(t, returnedProduct)
+	require.Equal(t, product.Name, returnedProduct.Name)
+}

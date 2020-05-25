@@ -59,6 +59,5 @@ func (useCase DefaultProductUseCase) GetCatalog(ctx context.Context, filterOptio
 }
 
 func (useCase DefaultProductUseCase) GetProduct(ctx context.Context, productID string) (*entities.Product, error) {
-	// TODO implement
-	return nil, nil
+	return useCase.productStorageAdapter.Get(ctx, productID)
 }
