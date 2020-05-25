@@ -1,0 +1,7 @@
+tools:
+  - name: go
+    checks:
+      version: ">= 1.4"
+  - name: golangci-lint
+    checks:
+      version: ">= 1.26"
